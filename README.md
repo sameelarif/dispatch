@@ -1,3 +1,9 @@
+# Dispatch
+
+## Description
+
+Dispatch is a Next.js web application that provides a user-friendly form submission system with integrated Datadog log monitoring and AI-powered log analysis. The application features automated cron jobs that monitor Datadog logs every 30 seconds and process new entries through AI to generate human-readable explanations.
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
