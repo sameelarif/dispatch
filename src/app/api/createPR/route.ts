@@ -100,13 +100,8 @@ export async function POST(request: NextRequest) {
             }`
           );
 
-          // Check if conversation is complete and has a PR number
-          if (
-            (statusData.status === "STOPPED" ||
-              statusData.runtime_status === "STATUS$STOPPED") &&
-            statusData.pr_number &&
-            statusData.pr_number.length > 0
-          ) {
+          // Check if PR number is available (regardless of status)
+          if (statusData.pr_number && statusData.pr_number.length > 0) {
             isComplete = true;
             console.log(
               `Conversation ${conversationId} completed with status: ${statusData.status} and PR number: ${statusData.pr_number}`
