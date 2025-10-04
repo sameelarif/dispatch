@@ -25,7 +25,7 @@ interface AiriaResponse {
   success: boolean;
   message?: string;
   error?: string;
-  data?: any;
+  data?: unknown;
 }
 
 interface ErrorAnalysis {
@@ -157,7 +157,7 @@ function parseErrorAnalysis(airiaResponse: string, originalError?: string): Erro
   const lines = airiaResponse.split('\n').filter(line => line.trim());
   
   // Default values
-  let userFriendlyMessage = airiaResponse;
+  const userFriendlyMessage = airiaResponse;
   let severity: 'low' | 'medium' | 'high' | 'critical' = 'medium';
   let suggestedActions: string[] = [];
   let errorCode: string | undefined;

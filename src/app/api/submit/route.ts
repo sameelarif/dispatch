@@ -60,7 +60,13 @@ export async function POST(request: NextRequest) {
 }
 
 // Simulate a function that could fail in a real application
-async function processUserData(userData: any) {
+async function processUserData(userData: {
+  id: string;
+  name: string;
+  email: string;
+  message: string;
+  submittedAt: string;
+}) {
   // Simulate a realistic business logic error
   // This could be a database operation, external API call, or data validation
 
