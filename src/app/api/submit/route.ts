@@ -18,8 +18,16 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Simulate a realistic business logic error
-    // This could happen in a real application when processing user data
+    // Email format validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(body.email)) {
+      return NextResponse.json(
+        { error: "Please provide a valid email address" },
+        { status: 400 }
+      );
+    }
+
+    // Process the user data
     const userData = {
       id: Date.now().toString(),
       name: body.name.trim(),
@@ -28,10 +36,8 @@ export async function POST(request: NextRequest) {
       submittedAt: new Date().toISOString(),
     };
 
-    // Simulate a database operation that could fail
-    // This is a realistic error that would be caught by error monitoring
     try {
-      // Simulate a database connection issue or data processing error
+      // Process user data with proper error handling
       const processedData = await processUserData(userData);
 
       // Log the processed data
@@ -43,12 +49,18 @@ export async function POST(request: NextRequest) {
         data: processedData,
       });
     } catch (processingError) {
-      // This error will be caught by Datadog and trigger the SMS/PR workflow
+      // Log the processing error for monitoring
+      console.error("Processing error:", processingError);
+      
       const errorMessage =
         processingError instanceof Error
           ? processingError.message
           : "Unknown processing error";
-      throw new Error(`Failed to process user data: ${errorMessage}`);
+      
+      return NextResponse.json(
+        { error: `Processing failed: ${errorMessage}` },
+        { status: 500 }
+      );
     }
   } catch (error) {
     console.error("Error processing form submission:", error);
@@ -59,32 +71,25 @@ export async function POST(request: NextRequest) {
   }
 }
 
-// Simulate a function that could fail in a real application
+// Process user data with proper validation and error handling
 async function processUserData(userData: any) {
-  // Simulate a realistic business logic error
-  // This could be a database operation, external API call, or data validation
-
-  // Simulate a random failure (30% chance) to make it realistic
-  if (Math.random() < 0.3) {
-    throw new Error("Database connection timeout - unable to save user data");
+  // Validate user data
+  if (!userData.name || userData.name.length < 2) {
+    throw new Error("Name must be at least 2 characters long");
   }
 
-  // Simulate another type of error that could occur
-  if (userData.email.includes("test@example.com")) {
-    throw new Error("Invalid email domain - test@example.com is not allowed");
+  if (!userData.email || !userData.email.includes("@")) {
+    throw new Error("Invalid email format");
   }
 
-  // Simulate a data processing error
-  if (userData.name.length < 2) {
-    throw new Error(
-      "Name validation failed - name must be at least 2 characters"
-    );
-  }
+  // Simulate processing delay (like a database operation)
+  await new Promise(resolve => setTimeout(resolve, 100));
 
-  // If we get here, processing was successful
+  // Return processed data
   return {
     ...userData,
     processedAt: new Date().toISOString(),
     status: "processed",
+    id: userData.id || Date.now().toString(),
   };
 }
