@@ -1,0 +1,81 @@
+{
+  "success": true,
+  "message": "Analyzed 2 errors from the last 2 hours",
+  "errors": [
+    {
+      "id": "event-8310474439791423000",
+      "title": "[Recovered] new_vercel_logs",
+      "message": "%%%\n\n@webhook-Vercel_Console_Log\n\nLess than or exactly **0** log events matched in the last **1m** against the monitored query: **[`*`](https://us5.datadoghq.com/logs?query=%2A&agg_m=count&agg_t=count&index=%2A)**\n\nThe monitor was last triggered at Sat Oct 04 2025 19:17:52 UTC.\n\n- - -\n\n[[Monitor Status](/monitors/16085692?from_ts=1759604752000&to_ts=1759605952000&event_id=8310474439791423540&link_source=monitor_notif)] · [[Edit Monitor](/monitors/16085692/edit?link_source=monitor_notif)] · [[Related Logs](/logs?query=%2A&from_ts=1759605592000&to_ts=1759605652000&live=false&agg_m=count&agg_t=count&index=%2A&link_source=monitor_notif)]\n%%%",
+      "timestamp": "2025-10-04T19:20:52.000Z",
+      "service": "Monitor Alert",
+      "host": null,
+      "tags": [
+        "monitor",
+        "source:alert"
+      ],
+      "severity": "normal",
+      "status": "error"
+    },
+    {
+      "id": "event-8310471415077754000",
+      "title": "[Triggered] new_vercel_logs",
+      "message": "%%%\n**Error samples ()**\n\nDatadog webhook processed successfully: {\n  webhookType: &#x27;unknown&#x27;,\n  hasAlert: false,\n  hasEvent: false,\n  hasMonitor: false,\n  rawData: {\n    title: &#x27;new_vercel_logs&#x27;,\n    status: &#x27;&#x27;,\n    monitor_id: &#x27;$MONITOR_ID&#x27;,\n    alert_id: &#x27;16085692&#x27;,\n    scope: &#x27;&#x27;,\n    link: &#x27;https://us5.datadoghq.com/event/event?id=8310469396662942938&#x27;,\n    tags: &#x27;monitor&#x27;,\n    date: &#x27;1759605352000&#x27;,\n    message: &#x27;\n&#x27; +\n      &#x27;Error samples ()\n&#x27; +\n      &#x27;\n&#x27; +\n      &#x27;Datadog webhook processed successfully: {\n&#x27; +\n      &#x27;  webhookType: &amp;#x27;unknown&amp;#x27;,\n&#x27; +\n      &#x27;  hasAlert: false,\n&#x27; +\n      &#x27;  hasEvent: false,\n&#x27; +\n      &#x27;  hasMonitor: false,\n&#x27; +\n      &#x27;  rawData: {\n&#x27; +\n      &#x27;    title: &amp;#x27;new_vercel_logs&amp;#x27;,\n&#x27; +\n      &#x27;    status: &amp;#x27;&amp;#x27;,\n&#x27; +\n      &#x27;    monitor_id: &amp;#x27;$MONITOR_ID&amp;#x27;,\n&#x27; +\n      &#x27;    alert_id: &amp;#x27;16085692&amp;#x27;,\n&#x27; +\n      &#x27;    scope: &amp;#x27;&amp;#x27;,\n&#x27; +\n      &#x27;    link: &amp;#x27;https://us5.datadoghq.com/event/event?id=8310467384247020580&amp;#x27;,\n&#x27; +\n      &#x27;    tags: &amp;#x27;monitor&amp;#x27;,\n&#x27; +\n      &#x27;    date: &amp;#x27;1759605232000&amp;#x27;,\n&#x27; +\n      &#x27;    message: &amp;#x27;\n&#x27; +\n      &#x27;&amp;#x27; +\n&#x27; +\n      &#x27;      &amp;#x27;@webhook-Vercel_Console_Log\n&#x27; +\n      &#x27;&amp;#x27; +\n&#x27; +\n      &#x27;      &amp;#x27;\n&#x27; +\n      &#x27;&amp;#x27; +\n&#x27; +\n      &#x27;      &amp;#x27;Less than or exactly 0 log events matched in the last 1m against the monitored query: &amp;#x60;*&amp;#x60;\n&#x27; +\n      &#x27;&amp;#x27; +\n&#x27; +\n      &#x27;      &amp;#x27;\n&#x27; +\n      &#x27;&amp;#x27; +\n&#x27; +\n      &#x27;      &amp;#x27;Metric Graph: https://us5.datadoghq.com/monitors/16085692?from_ts=1759604332000&amp;amp;to_ts=1759605532000&amp;amp;event_id=8310467384247020580&amp;amp;link_source=monitor_notif · Monitor Status: https://us5.datadoghq.com/monitors/16085692?from_ts=1759604332000&amp;amp;to_ts=1759605532000&amp;amp;event_id=8310467384247020580&amp;amp;link_source=monitor_notif · Edit Monitor: https://us5.datadoghq.com/monitors/16085692/edit?link_source=monitor_notif · Related Logs: https://us5.datadoghq.com/logs?query=%2A&amp;amp;from_ts=1759605172000&amp;amp;to_ts=1759605232000&amp;amp;live=false&amp;amp;agg_m=count&amp;amp;agg_t=count&amp;amp;index=%2A&amp;amp;link_source=monitor_notif · Event URL: https://us5.datadoghq.com/event/event?id=8310467384247020580&amp;amp;start=1759605172000&amp;amp;end=1759605232000&amp;#x27;\n&#x27; +\n      &#x27;  }\n&#x27; +\n      &#x27;}\n&#x27; +\n      &#x27;\n&#x27; +\n      &#x27;@webhook-Vercel_Console_Log\n&#x27; +\n      &#x27;\n&#x27; +\n      &#x27;More than 0 log events matched in the last 1m against the monitored query: &#x60;*&#x60;\n&#x27; +\n      &#x27;\n&#x27; +\n      &#x27;Metric Graph: https://us5.datadoghq.com/monitors/16085692?from_ts=1759604452000&amp;to_ts=1759605652000&amp;event_id=8310469396662942938&amp;link_source=monitor_notif · Monitor Status: https://us5.datadoghq.com/monitors/16085692?from_ts=1759604452000&amp;to_ts=1759605652000&amp;event_id=8310469396662942938&amp;link_source=monitor_notif · Edit Monitor: https://us5.datadoghq.com/monitors/16085692/edit?link_source=monitor_notif · Related Logs: https://us5.datadoghq.com/logs?query=%2A&amp;from_ts=1759605292000&amp;to_ts=1759605352000&amp;live=false&amp;agg_m=count&amp;agg_t=count&amp;index=%2A&amp;link_source=monitor_notif · Event URL: https://us5.datadoghq.com/event/event?id=8310469396662942938&amp;start=1759605292000&amp;end=1759605352000&#x27;\n  }\n}\n\n@webhook-Vercel_Console_Log\n\nMore than **0** log events matched in the last **1m** against the monitored query: **[`*`](https://us5.datadoghq.com/logs?query=%2A&agg_m=count&agg_t=count&index=%2A)**\n\nThe monitor was last triggered at Sat Oct 04 2025 19:17:52 UTC.\n\n- - -\n\n[[Monitor Status](/monitors/16085692?from_ts=1759604572000&to_ts=1759605772000&event_id=8310471415077753680&link_source=monitor_notif)] · [[Edit Monitor](/monitors/16085692/edit?link_source=monitor_notif)] · [[Related Logs](/logs?query=%2A&from_ts=1759605412000&to_ts=1759605472000&live=false&agg_m=count&agg_t=count&index=%2A&link_source=monitor_notif)]\n%%%",
+      "timestamp": "2025-10-04T19:17:52.000Z",
+      "service": "Monitor Alert",
+      "host": null,
+      "tags": [
+        "monitor",
+        "source:alert"
+      ],
+      "severity": "normal",
+      "status": "error"
+    }
+  ],
+  "descriptions": [
+    {
+      "error": {
+        "id": "event-8310474439791423000",
+        "title": "[Recovered] new_vercel_logs",
+        "message": "%%%\n\n@webhook-Vercel_Console_Log\n\nLess than or exactly **0** log events matched in the last **1m** against the monitored query: **[`*`](https://us5.datadoghq.com/logs?query=%2A&agg_m=count&agg_t=count&index=%2A)**\n\nThe monitor was last triggered at Sat Oct 04 2025 19:17:52 UTC.\n\n- - -\n\n[[Monitor Status](/monitors/16085692?from_ts=1759604752000&to_ts=1759605952000&event_id=8310474439791423540&link_source=monitor_notif)] · [[Edit Monitor](/monitors/16085692/edit?link_source=monitor_notif)] · [[Related Logs](/logs?query=%2A&from_ts=1759605592000&to_ts=1759605652000&live=false&agg_m=count&agg_t=count&index=%2A&link_source=monitor_notif)]\n%%%",
+        "timestamp": "2025-10-04T19:20:52.000Z",
+        "service": "Monitor Alert",
+        "host": null,
+        "tags": [
+          "monitor",
+          "source:alert"
+        ],
+        "severity": "normal",
+        "status": "error"
+      },
+      "description": "Hello! I see you've sent just a period. Is there something specific you'd like to talk about or ask? I'm here to help with any questions or have a conversation about whatever interests you."
+    },
+    {
+      "error": {
+        "id": "event-8310471415077754000",
+        "title": "[Triggered] new_vercel_logs",
+        "message": "%%%\n**Error samples ()**\n\nDatadog webhook processed successfully: {\n  webhookType: &#x27;unknown&#x27;,\n  hasAlert: false,\n  hasEvent: false,\n  hasMonitor: false,\n  rawData: {\n    title: &#x27;new_vercel_logs&#x27;,\n    status: &#x27;&#x27;,\n    monitor_id: &#x27;$MONITOR_ID&#x27;,\n    alert_id: &#x27;16085692&#x27;,\n    scope: &#x27;&#x27;,\n    link: &#x27;https://us5.datadoghq.com/event/event?id=8310469396662942938&#x27;,\n    tags: &#x27;monitor&#x27;,\n    date: &#x27;1759605352000&#x27;,\n    message: &#x27;\n&#x27; +\n      &#x27;Error samples ()\n&#x27; +\n      &#x27;\n&#x27; +\n      &#x27;Datadog webhook processed successfully: {\n&#x27; +\n      &#x27;  webhookType: &amp;#x27;unknown&amp;#x27;,\n&#x27; +\n      &#x27;  hasAlert: false,\n&#x27; +\n      &#x27;  hasEvent: false,\n&#x27; +\n      &#x27;  hasMonitor: false,\n&#x27; +\n      &#x27;  rawData: {\n&#x27; +\n      &#x27;    title: &amp;#x27;new_vercel_logs&amp;#x27;,\n&#x27; +\n      &#x27;    status: &amp;#x27;&amp;#x27;,\n&#x27; +\n      &#x27;    monitor_id: &amp;#x27;$MONITOR_ID&amp;#x27;,\n&#x27; +\n      &#x27;    alert_id: &amp;#x27;16085692&amp;#x27;,\n&#x27; +\n      &#x27;    scope: &amp;#x27;&amp;#x27;,\n&#x27; +\n      &#x27;    link: &amp;#x27;https://us5.datadoghq.com/event/event?id=8310467384247020580&amp;#x27;,\n&#x27; +\n      &#x27;    tags: &amp;#x27;monitor&amp;#x27;,\n&#x27; +\n      &#x27;    date: &amp;#x27;1759605232000&amp;#x27;,\n&#x27; +\n      &#x27;    message: &amp;#x27;\n&#x27; +\n      &#x27;&amp;#x27; +\n&#x27; +\n      &#x27;      &amp;#x27;@webhook-Vercel_Console_Log\n&#x27; +\n      &#x27;&amp;#x27; +\n&#x27; +\n      &#x27;      &amp;#x27;\n&#x27; +\n      &#x27;&amp;#x27; +\n&#x27; +\n      &#x27;      &amp;#x27;Less than or exactly 0 log events matched in the last 1m against the monitored query: &amp;#x60;*&amp;#x60;\n&#x27; +\n      &#x27;&amp;#x27; +\n&#x27; +\n      &#x27;      &amp;#x27;\n&#x27; +\n      &#x27;&amp;#x27; +\n&#x27; +\n      &#x27;      &amp;#x27;Metric Graph: https://us5.datadoghq.com/monitors/16085692?from_ts=1759604332000&amp;amp;to_ts=1759605532000&amp;amp;event_id=8310467384247020580&amp;amp;link_source=monitor_notif · Monitor Status: https://us5.datadoghq.com/monitors/16085692?from_ts=1759604332000&amp;amp;to_ts=1759605532000&amp;amp;event_id=8310467384247020580&amp;amp;link_source=monitor_notif · Edit Monitor: https://us5.datadoghq.com/monitors/16085692/edit?link_source=monitor_notif · Related Logs: https://us5.datadoghq.com/logs?query=%2A&amp;amp;from_ts=1759605172000&amp;amp;to_ts=1759605232000&amp;amp;live=false&amp;amp;agg_m=count&amp;amp;agg_t=count&amp;amp;index=%2A&amp;amp;link_source=monitor_notif · Event URL: https://us5.datadoghq.com/event/event?id=8310467384247020580&amp;amp;start=1759605172000&amp;amp;end=1759605232000&amp;#x27;\n&#x27; +\n      &#x27;  }\n&#x27; +\n      &#x27;}\n&#x27; +\n      &#x27;\n&#x27; +\n      &#x27;@webhook-Vercel_Console_Log\n&#x27; +\n      &#x27;\n&#x27; +\n      &#x27;More than 0 log events matched in the last 1m against the monitored query: &#x60;*&#x60;\n&#x27; +\n      &#x27;\n&#x27; +\n      &#x27;Metric Graph: https://us5.datadoghq.com/monitors/16085692?from_ts=1759604452000&amp;to_ts=1759605652000&amp;event_id=8310469396662942938&amp;link_source=monitor_notif · Monitor Status: https://us5.datadoghq.com/monitors/16085692?from_ts=1759604452000&amp;to_ts=1759605652000&amp;event_id=8310469396662942938&amp;link_source=monitor_notif · Edit Monitor: https://us5.datadoghq.com/monitors/16085692/edit?link_source=monitor_notif · Related Logs: https://us5.datadoghq.com/logs?query=%2A&amp;from_ts=1759605292000&amp;to_ts=1759605352000&amp;live=false&amp;agg_m=count&amp;agg_t=count&amp;index=%2A&amp;link_source=monitor_notif · Event URL: https://us5.datadoghq.com/event/event?id=8310469396662942938&amp;start=1759605292000&amp;end=1759605352000&#x27;\n  }\n}\n\n@webhook-Vercel_Console_Log\n\nMore than **0** log events matched in the last **1m** against the monitored query: **[`*`](https://us5.datadoghq.com/logs?query=%2A&agg_m=count&agg_t=count&index=%2A)**\n\nThe monitor was last triggered at Sat Oct 04 2025 19:17:52 UTC.\n\n- - -\n\n[[Monitor Status](/monitors/16085692?from_ts=1759604572000&to_ts=1759605772000&event_id=8310471415077753680&link_source=monitor_notif)] · [[Edit Monitor](/monitors/16085692/edit?link_source=monitor_notif)] · [[Related Logs](/logs?query=%2A&from_ts=1759605412000&to_ts=1759605472000&live=false&agg_m=count&agg_t=count&index=%2A&link_source=monitor_notif)]\n%%%",
+        "timestamp": "2025-10-04T19:17:52.000Z",
+        "service": "Monitor Alert",
+        "host": null,
+        "tags": [
+          "monitor",
+          "source:alert"
+        ],
+        "severity": "normal",
+        "status": "error"
+      },
+      "description": "Hello! I see you've sent just a period. Is there something specific you'd like to discuss or ask about? I'm here to help with any questions or topics you have in mind."
+    }
+  ],
+  "summary": {
+    "totalErrors": 2,
+    "services": [
+      "Monitor Alert"
+    ],
+    "hosts": [],
+    "severities": [
+      "normal"
+    ]
+  },
+  "timestamp": "2025-10-04T19:23:00.408Z"
+}
