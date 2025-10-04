@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { generateText } from "ai";
 
 export async function POST(request: NextRequest) {
   try {
@@ -11,6 +12,28 @@ export async function POST(request: NextRequest) {
       body: body,
     });
 
+    // Generate human-readable error message using AI
+    let humanReadableError = null;
+    try {
+      const { text } = await generateText({
+        model: "openai/gpt-4o-mini",
+        prompt: `Convert this Datadog webhook data into a clear, human-readable error message. Focus on what the issue is, its severity, and what actions might be needed. Be concise but informative.
+
+Datadog webhook data:
+${JSON.stringify(body, null, 2)}
+
+Provide a clear explanation of what this alert/error means in plain English.`,
+      });
+
+      humanReadableError = text;
+      console.log("AI-generated human-readable error:", humanReadableError);
+    } catch (aiError) {
+      console.error(
+        "Failed to generate human-readable error with AI:",
+        aiError
+      );
+    }
+
     // Process different types of Datadog webhooks
     if (body.alert) {
       console.log("Processing Datadog alert:", {
@@ -19,6 +42,7 @@ export async function POST(request: NextRequest) {
         status: body.alert.status,
         severity: body.alert.severity,
         tags: body.alert.tags,
+        humanReadableError,
       });
     }
 
@@ -29,6 +53,7 @@ export async function POST(request: NextRequest) {
         text: body.event.text,
         priority: body.event.priority,
         tags: body.event.tags,
+        humanReadableError,
       });
     }
 
@@ -38,6 +63,7 @@ export async function POST(request: NextRequest) {
         name: body.monitor.name,
         status: body.monitor.status,
         type: body.monitor.type,
+        humanReadableError,
       });
     }
 
@@ -47,12 +73,14 @@ export async function POST(request: NextRequest) {
       hasAlert: !!body.alert,
       hasEvent: !!body.event,
       hasMonitor: !!body.monitor,
+      humanReadableError,
       rawData: body,
     });
 
     return NextResponse.json({
       success: true,
       message: "Datadog webhook processed successfully",
+      humanReadableError,
       timestamp: new Date().toISOString(),
     });
   } catch (error) {
@@ -82,7 +110,7 @@ export async function GET(request: NextRequest) {
   }
 
   return NextResponse.json({
-    message: "Datadog webhook endpoint is active",
+    message: "Datadog webhook endpoint  tive",
     timestamp: new Date().toISOString(),
   });
 }

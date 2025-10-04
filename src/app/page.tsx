@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function Home() {
   const [formData, setFormData] = useState({
@@ -12,6 +12,10 @@ export default function Home() {
   const [submitStatus, setSubmitStatus] = useState<
     "idle" | "success" | "error"
   >("idle");
+  const [cronStatus, setCronStatus] = useState<
+    "unknown" | "configured" | "error"
+  >("unknown");
+  const [cronInfo, setCronInfo] = useState<any>(null);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -37,7 +41,7 @@ export default function Home() {
         body: JSON.stringify(formData),
       });
 
-      const result = await response.json();
+      await response.json();
 
       if (response.ok) {
         setSubmitStatus("success");
@@ -52,6 +56,23 @@ export default function Home() {
       setIsSubmitting(false);
     }
   };
+
+  const checkCronStatus = async () => {
+    try {
+      const response = await fetch("/api/cron/datadog");
+      const data = await response.json();
+      setCronStatus(data.status);
+      setCronInfo(data.info);
+    } catch (error) {
+      console.error("Error checking cron status:", error);
+      setCronStatus("error");
+    }
+  };
+
+  // Check cron status on component mount
+  useEffect(() => {
+    checkCronStatus();
+  }, []);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800 flex items-center justify-center p-4">
@@ -148,6 +169,83 @@ export default function Home() {
               </div>
             )}
           </form>
+
+          {/* Datadog Cron Controls */}
+          <div className="mt-8 pt-6 border-t border-gray-200 dark:border-gray-600">
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
+              Datadog Log Monitoring
+            </h3>
+
+            <div className="space-y-4">
+              <div className="flex items-center justify-between">
+                <span className="text-sm text-gray-600 dark:text-gray-300">
+                  Status:
+                  <span
+                    className={`ml-2 px-2 py-1 rounded text-xs font-medium ${
+                      cronStatus === "configured"
+                        ? "bg-green-100 text-green-800 dark:bg-green-900/20 dark:text-green-200"
+                        : cronStatus === "error"
+                        ? "bg-red-100 text-red-800 dark:bg-red-900/20 dark:text-red-200"
+                        : "bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-200"
+                    }`}
+                  >
+                    {cronStatus === "configured"
+                      ? "🟢 Configured"
+                      : cronStatus === "error"
+                      ? "🔴 Error"
+                      : "⚪ Unknown"}
+                  </span>
+                </span>
+                <button
+                  onClick={checkCronStatus}
+                  className="text-xs text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-200"
+                >
+                  Refresh
+                </button>
+              </div>
+
+              {cronInfo && (
+                <div className="bg-gray-50 dark:bg-gray-700 rounded-lg p-3 space-y-2">
+                  <div className="text-xs text-gray-600 dark:text-gray-300">
+                    <strong>Type:</strong> {cronInfo.type}
+                  </div>
+                  <div className="text-xs text-gray-600 dark:text-gray-300">
+                    <strong>Schedule:</strong> {cronInfo.schedule}
+                  </div>
+                  <div className="text-xs text-gray-600 dark:text-gray-300">
+                    <strong>Endpoint:</strong> {cronInfo.endpoint}
+                  </div>
+                  <div className="text-xs text-gray-600 dark:text-gray-300">
+                    <strong>Environment:</strong>
+                    <span
+                      className={`ml-1 ${
+                        cronInfo.environment?.hasApiKey
+                          ? "text-green-600"
+                          : "text-red-600"
+                      }`}
+                    >
+                      API Key {cronInfo.environment?.hasApiKey ? "✓" : "✗"}
+                    </span>
+                    <span
+                      className={`ml-2 ${
+                        cronInfo.environment?.hasAppKey
+                          ? "text-green-600"
+                          : "text-red-600"
+                      }`}
+                    >
+                      App Key {cronInfo.environment?.hasAppKey ? "✓" : "✗"}
+                    </span>
+                  </div>
+                </div>
+              )}
+
+              <p className="text-xs text-gray-500 dark:text-gray-400">
+                Vercel cron job automatically monitors Datadog logs every 30
+                seconds and processes new entries through AI for human-readable
+                explanations. No manual management required.
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
