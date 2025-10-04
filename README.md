@@ -1,3 +1,9 @@
+# Dispatch
+
+## Description
+
+Dispatch is a Next.js application that provides intelligent error monitoring and log analysis through Datadog integration. The application features a form submission interface with intentional error handling for testing purposes and uses AI to automatically process and explain log entries in human-readable format.
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
