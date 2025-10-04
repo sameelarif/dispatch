@@ -25,7 +25,7 @@ async function searchNewLogs(): Promise<string[]> {
     const response = await logsApi.listLogsGet({
       filterQuery:
         'NOT "webhook" AND (status:error OR @level:error OR @severity:error OR "Error:" OR "Exception:" OR "Failed:" OR "error" OR "ERROR" OR "Exception" OR "Failed")',
-      sort: "-timestamp",
+      sort: "timestamp",
       pageLimit: 1000,
     });
 
@@ -43,9 +43,27 @@ async function searchNewLogs(): Promise<string[]> {
 
       processedLogIds.add(logId);
       const message = log.attributes?.message;
+      const timestamp = log.attributes?.timestamp;
 
       if (message && typeof message === "string") {
-        logMessages.push(message);
+        let formattedDate = "";
+        if (timestamp) {
+          // Datadog timestamps are in milliseconds since epoch
+          const date = new Date(timestamp);
+          formattedDate = date.toLocaleString("en-US", {
+            year: "numeric",
+            month: "2-digit",
+            day: "2-digit",
+            hour: "2-digit",
+            minute: "2-digit",
+            second: "2-digit",
+            hour12: false,
+          });
+        }
+        const messageWithDate = formattedDate
+          ? `[${formattedDate}] ${message}`
+          : message;
+        logMessages.push(messageWithDate);
       }
     }
 
