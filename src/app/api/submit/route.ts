@@ -4,9 +4,6 @@ export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
 
-    // Throw an intentional exception
-    throw new Error("Intentional API route error - this is a test exception");
-
     // Log the form data
     console.log("Form submission received:", {
       timestamp: new Date().toISOString(),
