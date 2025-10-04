@@ -15,7 +15,15 @@ export default function Home() {
   const [cronStatus, setCronStatus] = useState<
     "unknown" | "configured" | "error"
   >("unknown");
-  const [cronInfo, setCronInfo] = useState<any>(null);
+  const [cronInfo, setCronInfo] = useState<{
+    type: string;
+    schedule: string;
+    endpoint: string;
+    environment: {
+      hasApiKey: boolean;
+      hasAppKey: boolean;
+    };
+  } | null>(null);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
