@@ -64,16 +64,101 @@ export async function POST(request: NextRequest) {
     }
 
     const conversation = await response.json();
+    const conversationId = conversation.conversation_id || conversation.id;
 
-    // Return the conversation details
+    // Wait 20 seconds before starting to poll
+    console.log(
+      `Waiting 20 seconds before polling conversation ${conversationId}...`
+    );
+    await new Promise((resolve) => setTimeout(resolve, 20000));
+
+    // Poll the conversation status every 10 seconds
+    let isComplete = false;
+    let pollCount = 0;
+    const maxPolls = 30; // Maximum 5 minutes of polling (30 * 10 seconds)
+
+    while (!isComplete && pollCount < maxPolls) {
+      try {
+        const statusResponse = await fetch(
+          `https://app.all-hands.dev/api/conversations/${conversationId}`,
+          {
+            method: "GET",
+            headers: {
+              "X-Session-API-Key": apiKey,
+              "Content-Type": "application/json",
+            },
+          }
+        );
+
+        if (statusResponse.ok) {
+          const statusData = await statusResponse.json();
+          console.log(
+            `Poll ${pollCount + 1}: Status = ${
+              statusData.status
+            }, Runtime Status = ${statusData.runtime_status}, PR Number = ${
+              statusData.pr_number || "undefined"
+            }`
+          );
+
+          // Check if conversation is complete and has a PR number
+          if (
+            (statusData.status === "STOPPED" ||
+              statusData.runtime_status === "STATUS$STOPPED") &&
+            statusData.pr_number &&
+            statusData.pr_number.length > 0
+          ) {
+            isComplete = true;
+            console.log(
+              `Conversation ${conversationId} completed with status: ${statusData.status} and PR number: ${statusData.pr_number}`
+            );
+
+            // Return the final conversation details with PR number
+            return NextResponse.json({
+              success: true,
+              conversation: {
+                id: conversationId,
+                status: statusData.status,
+                runtime_status: statusData.runtime_status,
+                link: `https://app.all-hands.dev/conversations/${conversationId}`,
+                pr_number: statusData.pr_number,
+                title: statusData.title,
+                selected_repository: statusData.selected_repository,
+                selected_branch: statusData.selected_branch,
+                last_updated_at: statusData.last_updated_at,
+              },
+            });
+          }
+        } else {
+          console.error(
+            `Failed to get status for conversation ${conversationId}:`,
+            statusResponse.status
+          );
+        }
+      } catch (error) {
+        console.error(`Error polling conversation ${conversationId}:`, error);
+      }
+
+      pollCount++;
+      if (!isComplete && pollCount < maxPolls) {
+        console.log(
+          `Waiting 10 seconds before next poll... (${pollCount}/${maxPolls})`
+        );
+        await new Promise((resolve) => setTimeout(resolve, 10000));
+      }
+    }
+
+    // If we've reached max polls without completion, return current status
+    console.log(
+      `Conversation ${conversationId} polling timed out after ${maxPolls} attempts`
+    );
     return NextResponse.json({
       success: true,
       conversation: {
-        id: conversation.conversation_id || conversation.id,
-        status: conversation.status,
-        link: `https://app.all-hands.dev/conversations/${
-          conversation.conversation_id || conversation.id
-        }`,
+        id: conversationId,
+        status: "TIMEOUT",
+        link: `https://app.all-hands.dev/conversations/${conversationId}`,
+        message:
+          "Conversation polling timed out. Check the link for current status.",
       },
     });
   } catch (error) {
