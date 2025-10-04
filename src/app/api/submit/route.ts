@@ -1,5 +1,18 @@
 import { NextRequest, NextResponse } from "next/server";
 
+interface UserData {
+  id: string;
+  name: string;
+  email: string;
+  message: string;
+  submittedAt: string;
+}
+
+interface ProcessedUserData extends UserData {
+  processedAt: string;
+  status: string;
+}
+
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
@@ -60,7 +73,7 @@ export async function POST(request: NextRequest) {
 }
 
 // Simulate a function that could fail in a real application
-async function processUserData(userData: any) {
+async function processUserData(userData: UserData): Promise<ProcessedUserData> {
   // Simulate a realistic business logic error
   // This could be a database operation, external API call, or data validation
 
