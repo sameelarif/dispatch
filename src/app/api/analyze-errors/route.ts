@@ -223,22 +223,22 @@ export async function GET(request: NextRequest) {
       });
     }
 
-    // Take the first error and analyze it with Airia
-    const firstError = errors[0];
+    // Send all errors together to Airia for complete context analysis
+    const allErrorsText = errors.join('\n\n---\n\n'); // Join all errors with separators
     let analysis: ErrorAnalysis;
     
     try {
-      const airiaResponse = await callAiriaAPI(firstError);
-      analysis = parseErrorAnalysis(airiaResponse, firstError);
+      const airiaResponse = await callAiriaAPI(allErrorsText);
+      analysis = parseErrorAnalysis(airiaResponse, allErrorsText);
     } catch (airiaError) {
       console.error("Failed to analyze error with Airia:", airiaError);
       // Fallback analysis with error code extraction
-      analysis = parseErrorAnalysis("Unable to analyze this error automatically. Please review the technical details below.", firstError);
+      analysis = parseErrorAnalysis("Unable to analyze this error automatically. Please review the technical details below.", allErrorsText);
     }
 
     return NextResponse.json({
       success: true,
-      message: `Found ${errors.length} errors, analyzed 1 with AI`,
+      message: `Found ${errors.length} errors, analyzed complete context with AI`,
       errors,
       analyses: [analysis],
       timestamp: new Date().toISOString(),
