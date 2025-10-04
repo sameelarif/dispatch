@@ -68,14 +68,14 @@ Provide a clear explanation of what this alert/error means in plain English.`,
     }
 
     // Log the webhook type and any additional data
-    console.log("Datadog webhook processed successfully:", {
-      webhookType: body.type || "unknown",
-      hasAlert: !!body.alert,
-      hasEvent: !!body.event,
-      hasMonitor: !!body.monitor,
-      humanReadableError,
-      rawData: body,
-    });
+    // console.log("Datadog webhook processed successfully:", {
+    //   webhookType: body.type || "unknown",
+    //   hasAlert: !!body.alert,
+    //   hasEvent: !!body.event,
+    //   hasMonitor: !!body.monitor,
+    //   humanReadableError,
+    //   rawData: body,
+    // });
 
     return NextResponse.json({
       success: true,
