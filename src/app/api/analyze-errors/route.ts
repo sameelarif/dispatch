@@ -274,7 +274,7 @@ export async function POST(request: NextRequest) {
 
     // Analyze the custom error with Airia
     const airiaResponse = await callAiriaAPI(customError);
-    const analysis = parseErrorAnalysis(airiaResponse);
+    const analysis = parseErrorAnalysis(airiaResponse, customError);
 
     return NextResponse.json({
       success: true,
