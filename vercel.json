@@ -1,8 +1,0 @@
-{
-  "crons": [
-    {
-      "path": "/api/cron/datadog-logs",
-      "schedule": "*/30 * * * * *"
-    }
-  ]
-}
